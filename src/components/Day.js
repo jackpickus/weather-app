@@ -24,13 +24,13 @@ function IconPicker(condition) {
 export const Day = ({date, currTemp, maxTemp, minTemp, condition}) => {
     return (
         <div>
-            <section>
-                <h2>Date: {date} </h2>
-                <p>The current temperature is: {currTemp}</p>
-                <p>The max temperature is: {maxTemp}</p>
-                <p>The min temperature is: {minTemp}</p>
-                <p>Current condition: {condition} {IconPicker(condition)}</p>
-            </section>
+            <tr>
+                <td>{date}</td>
+                <td>{currTemp}</td>
+                <td>{maxTemp}</td>
+                <td>{minTemp}</td>
+                <td>{condition} {IconPicker(condition)}</td>
+            </tr>
         </div>
     );
 }

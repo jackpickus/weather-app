@@ -22,6 +22,13 @@ class WeatherList extends React.Component {
                         placeholder="City..." />
                         <button>Get Weather</button>
                 </form>
+                <tr>
+                    <th>Date</th>
+                    <th>Current Temperature</th>
+                    <th>Max Temp</th>
+                    <th>Min Temp</th>
+                    <th>Condition</th>
+                </tr>
                 {days.map(
                     (day, i) =>
                         <Day

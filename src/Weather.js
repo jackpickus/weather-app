@@ -22,23 +22,28 @@ class WeatherList extends React.Component {
                         placeholder="City..." />
                         <button>Get Weather</button>
                 </form>
-                <tr>
-                    <th>Date</th>
-                    <th>Current Temperature</th>
-                    <th>Max Temp</th>
-                    <th>Min Temp</th>
-                    <th>Condition</th>
-                </tr>
-                {days.map(
-                    (day, i) =>
-                        <Day
-                            key={i}
-                            date={day.date}
-                            currTemp={day.currTemp}
-                            maxTemp={day.maxTemp}
-                            minTemp={day.minTemp}
-                            condition={day.condition} />
-                )}
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Date</th>
+                      <th scope="col">Current Temp</th>
+                      <th scope="col">Max Temp</th>
+                      <th scope="col">Min Temp</th>
+                      <th scope="col">Condition</th>
+                    </tr>
+                  </thead>
+                  {days.map(
+                      (day, i) =>
+                          <Day
+                              key={i}
+                              date={day.date}
+                              currTemp={day.currTemp}
+                              maxTemp={day.maxTemp}
+                              minTemp={day.minTemp}
+                              condition={day.condition} />
+                  )}
+                </table>
             </div>
         );
     }

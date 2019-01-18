@@ -4,14 +4,27 @@ import { Day } from './components/Day';
 
 class WeatherList extends React.Component {
 
-    state = { city: ''}
+    state = {
+        city: '',
+        data: []
+    }
 
     newCity = e =>
         this.setState({ city: e.target.value })
 
-    submit = e => {
-        console.log(`City chosen: ${this.state.city}`);
+    submit = async e => {
         e.preventDefault();
+        console.log(`City chosen: ${this.state.city}`);
+
+        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=4fcb479d435f4e2b224f7acef760cdb8&units=imperial`);
+
+        const weather = await api_call.json();
+
+        if (this.city !== null) {
+            this.setState({data: weather.main});
+        } else {
+            console.log("Failed to set state");
+        }
     }
 
     render() {

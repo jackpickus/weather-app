@@ -2,11 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import TiWeatherCloudy from 'react-icons/lib/ti/weather-cloudy';
-// import TiWeatherPartlyCloudy from 'react-icons/lib/ti/weather-partly-sunny';
 import TiWeatherSunny from 'react-icons/lib/ti/weather-sunny';
 import TiWeatherSnow from 'react-icons/lib/ti/weather-snow';
 import TiWeatherShower from 'react-icons/lib/ti/weather-shower';
-// import TiWeatherStormy from 'react-icons/lib/ti/weather-stormy';
 import GoQuestion from 'react-icons/lib/go/question';
 
 function IconPicker(condition) {

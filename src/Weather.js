@@ -1,27 +1,16 @@
 import React from 'react';
 import { Day } from './components/Day';
 
-const Temp = props => {
-    return(
-        <div>
-            <p>The current weather is: {props.condition}</p>
-            <p>The current temperature is: {props.temp}&#8457;</p>
-            <p>The max temp is: {props.max_temp}&#8457;</p>
-            <p>The min temp is: {props.min_temp}&#8457;</p>
-        </div>
-
-    );
-}
-
 class WeatherList extends React.Component {
 
     state = {
         city: '',
-        temp: '',
-        max_temp: '',
-        min_temp: '',
-        condition: '',
-        data: []
+        day1: [],
+        day2: [],
+        day3: [],
+        day4: [],
+        day5: [],
+        good: false
     }
 
     newCity = e =>
@@ -31,23 +20,24 @@ class WeatherList extends React.Component {
         e.preventDefault();
         console.log(`City chosen: ${this.state.city}`);
 
-        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=4fcb479d435f4e2b224f7acef760cdb8&units=imperial`);
+        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${this.state.city}&appid=4fcb479d435f4e2b224f7acef760cdb8&units=imperial`);
 
         const weather = await api_call.json();
 
+
         if (this.city !== '') {
-            this.setState({data: weather.main});
-            this.setState({temp: weather.main.temp});
-            this.setState({max_temp: this.state.data.temp_max});
-            this.setState({min_temp: weather.main.temp_min});
-            this.setState({condition: weather.weather[0].description})
+            this.setState({day1: weather.list[0]});
+            this.setState({day2: weather.list[8]});
+            this.setState({day3: weather.list[16]});
+            this.setState({day4: weather.list[24]});
+            this.setState({day5: weather.list[32]});
+            this.setState({good: true});
         } else {
             console.log("Failed to set state");
         }
     }
 
     render() {
-        const { days } = this.props;
         return(
             <div>
                 <h1> Welcome to My Weather App </h1>
@@ -61,13 +51,9 @@ class WeatherList extends React.Component {
                         <button>Get Weather</button>
                 </form>
 
-                {(this.state.temp !== "") ?
-                    <Temp
-                        temp={this.state.temp}
-                        max_temp={this.state.max_temp}
-                        min_temp={this.state.min_temp}
-                        condition={this.state.condition} />
-                    : <p></p>
+                {(this.state.city !== "" && this.state.good === true) ?
+                    <h1>Showing 5 day forecast for {this.state.city}</h1>
+                        : <p></p>
                 }
 
                 <table className="table">
@@ -81,16 +67,51 @@ class WeatherList extends React.Component {
                             </tr>
                     </thead>
                     <tbody>
-                        {days.map(
-                            (day, i) =>
-                                <Day
-                                    key={i}
-                                    date={day.date}
-                                    currTemp={day.currTemp}
-                                    maxTemp={day.maxTemp}
-                                    minTemp={day.minTemp}
-                                    condition={day.condition} />
-                        )}
+                        {this.state.good === false ?
+                            <p></p>
+                            : <Day
+                                date={this.state.day1.dt_txt}
+                                currTemp={this.state.day1.main.temp}
+                                maxTemp={this.state.day1.main.temp_max}
+                                minTemp={this.state.day1.main.temp_min}
+                                condition={this.state.day1.weather[0].main} />
+                        }
+                        {this.state.good === false ?
+                            <p></p>
+                            : <Day
+                                date={this.state.day2.dt_txt}
+                                currTemp={this.state.day2.main.temp}
+                                maxTemp={this.state.day2.main.temp_max}
+                                minTemp={this.state.day2.main.temp_min}
+                                condition={this.state.day2.weather[0].main} />
+                        }
+                        {this.state.good === false ?
+                            <p></p>
+                            : <Day
+                                date={this.state.day3.dt_txt}
+                                currTemp={this.state.day3.main.temp}
+                                maxTemp={this.state.day3.main.temp_max}
+                                minTemp={this.state.day3.main.temp_min}
+                                condition={this.state.day3.weather[0].main} />
+                        }
+                        {this.state.good === false ?
+                            <p></p>
+                            : <Day
+                                date={this.state.day4.dt_txt}
+                                currTemp={this.state.day4.main.temp}
+                                maxTemp={this.state.day4.main.temp_max}
+                                minTemp={this.state.day4.main.temp_min}
+                                condition={this.state.day4.weather[0].main} />
+                        }
+                        {this.state.good === false ?
+                            <p></p>
+                            : <Day
+                                date={this.state.day5.dt_txt}
+                                currTemp={this.state.day5.main.temp}
+                                maxTemp={this.state.day5.main.temp_max}
+                                minTemp={this.state.day5.main.temp_min}
+                                condition={this.state.day5.weather[0].main} />
+                        }
                     </tbody>
                 </table>
             </div>

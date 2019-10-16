@@ -25,7 +25,7 @@ class WeatherList extends React.Component {
         const weather = await api_call.json();
 
 
-        if (this.city !== '') {
+        if (weather.list !== undefined) {
             this.setState({day1: weather.list[0]});
             this.setState({day2: weather.list[8]});
             this.setState({day3: weather.list[16]});
@@ -68,7 +68,7 @@ class WeatherList extends React.Component {
                     </thead>
                     <tbody>
                         {this.state.good === false ?
-                            <p></p>
+														<tr></tr>
                             : <Day
                                 date={this.state.day1.dt_txt}
                                 currTemp={this.state.day1.main.temp}
@@ -77,7 +77,7 @@ class WeatherList extends React.Component {
                                 condition={this.state.day1.weather[0].main} />
                         }
                         {this.state.good === false ?
-                            <p></p>
+                            <tr></tr>
                             : <Day
                                 date={this.state.day2.dt_txt}
                                 currTemp={this.state.day2.main.temp}
@@ -86,7 +86,7 @@ class WeatherList extends React.Component {
                                 condition={this.state.day2.weather[0].main} />
                         }
                         {this.state.good === false ?
-                            <p></p>
+                            <tr></tr>
                             : <Day
                                 date={this.state.day3.dt_txt}
                                 currTemp={this.state.day3.main.temp}
@@ -95,7 +95,7 @@ class WeatherList extends React.Component {
                                 condition={this.state.day3.weather[0].main} />
                         }
                         {this.state.good === false ?
-                            <p></p>
+                            <tr></tr>
                             : <Day
                                 date={this.state.day4.dt_txt}
                                 currTemp={this.state.day4.main.temp}
@@ -104,7 +104,7 @@ class WeatherList extends React.Component {
                                 condition={this.state.day4.weather[0].main} />
                         }
                         {this.state.good === false ?
-                            <p></p>
+                            <tr></tr>
                             : <Day
                                 date={this.state.day5.dt_txt}
                                 currTemp={this.state.day5.main.temp}
